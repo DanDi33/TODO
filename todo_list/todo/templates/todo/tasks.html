@@ -6,7 +6,7 @@
     {% if tasks %}
         <ul class="tasks">
             {% for task in tasks %}
-            <li><a href="#">{{ task.title}}</a>
+            <li><a href="{% url 'task' task.id %}" class="{% if task.completed %} completed {% endif %}">{{ task.title}}</a>
 
             <div class="task-controls">
                 <a href=""><i class="bi bi-trash"></i></a>
