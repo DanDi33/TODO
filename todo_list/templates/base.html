@@ -18,9 +18,17 @@
                 <a href="{% url 'tasks'%}">
                     <i class="bi bi-list-task"></i>
                     My tasks</a>
+                    <a href="{% url 'task-create'%}">
+                        <i class="bi bi-plus-circle"></i>
+                        Create Task</a> 
             </nav>
         </div>
     </header>
+    {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{message.tags}}">{{message}}</div>
+    {% endfor %}
+    {% endif %}
     <main>
         <div class="container">
             {% block content %}
