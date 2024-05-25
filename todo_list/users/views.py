@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from django.views.generic.edit import FormView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -60,7 +60,7 @@ class MyProfile(View):
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile has been updated successfully')
-            return reverse_lazy('profile')
+            return redirect('profile')
         else:
             messages.error(request, "Error updating your profile")
             context = {
