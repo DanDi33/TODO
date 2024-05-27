@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    {% comment %} {% load cache %}
+    {% cache 60 menu %} {% endcomment %}
     <header class="header">
         <div class="container">
             <a href="{% url 'home'%}" class="logo">Todo</a>
@@ -25,7 +27,7 @@
                 <a href="{% url 'task-create'%}">
                     <i class="bi bi-plus-circle"></i>
                     Create Task</a>
-                <a href="#">Hi {{request.user| title }}</a>
+                <a href="{% url 'profile' %}">Hi {{request.user| title }}</a>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <input type="submit" class="btn btn-outline" value="Logout">
@@ -38,6 +40,7 @@
             </nav>
         </div>
     </header>
+    {% comment %} {% endcache %} {% endcomment %}
     {% if messages %}
     {% for message in messages %}
     <div class="alert alert-{{message.tags}}">{{message}}</div>
