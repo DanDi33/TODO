@@ -14,15 +14,14 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 import os
 import environ
 
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
+environ.Env.read_env(os.path.join(BASE_DIR,".env"))
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET_KEY')
@@ -33,8 +32,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS')
 
 LOGIN_URL = 'login'
-LOGOUT_REDIRECT_URL = '/login'
-
+# LOGOUT_REDIRECT_URL = '/login' 
 
 # Application definition
 
@@ -51,8 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+   
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -60,9 +57,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
-INTERNAL_IPS = ['127.0.0.1',]
+INTERNAL_IPS = ["127.0.0.1"]
+
+
 
 ROOT_URLCONF = 'todo_list.urls'
 
@@ -86,7 +87,7 @@ WSGI_APPLICATION = 'todo_list.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': env.db()
@@ -94,7 +95,7 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -110,17 +111,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 import os
+
 CACHES = {
     'default':{
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.path.join(BASE_DIR, 'todo_cache')
+        'LOCATION': os.path.join(BASE_DIR, 'todo_cache'),
     }
 }
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
+# https://docs.djangoproject.com/en/4.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -132,22 +133,21 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR/'static']
-
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(BASE_DIR/'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = [BASE_DIR/'static']
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-MEDIA_ROOT = BASE_DIR/'media'
+
+
+MEDIA_ROOT = BASE_DIR/"media"
+MEDIA_URL = "/media/"
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 # SMTP settings
 EMAIL_HOST = env('DJANGO_EMAIL_HOST')
 EMAIL_PORT = env('DJANGO_EMAIL_PORT')
